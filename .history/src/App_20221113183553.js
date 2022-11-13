@@ -57,7 +57,7 @@ function App() {
             </thead>
             <tbody>
             {movies.filter((val) => {
-              if (searchTerm === "") {
+              if (searchTerm == "") {
                 return val
               } else if (val.title.toLowerCase().includes(searchTerm.toLowerCase())) {
                 return val

@@ -1,7 +1,7 @@
 import React from 'react';
 //import movies from './movies.json';
 import './App.css';
-import {useState, useEffect} from 'react';
+import {useState} from 'react';
 import styles from "./index.css"
 
 function App() {
@@ -57,7 +57,7 @@ function App() {
             </thead>
             <tbody>
             {movies.filter((val) => {
-              if (searchTerm === "") {
+              if (searchTerm == "") {
                 return val
               } else if (val.title.toLowerCase().includes(searchTerm.toLowerCase())) {
                 return val
