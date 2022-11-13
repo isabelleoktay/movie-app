@@ -1,6 +1,7 @@
 import React from 'react'
 import '../App.css';
 import BasicTable from './BasicTable';
+import Search from './Search';
 
 function App() {
 
@@ -45,7 +46,10 @@ function App() {
   );
 
   return (
+    <>
+    <Search/>
     <BasicTable columns={columns} data={data}/>
+    </>
   );
 }
 
