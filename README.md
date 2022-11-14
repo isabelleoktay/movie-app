@@ -1,6 +1,6 @@
 # Movie Search App
 
-This movie search app was built using React Native for the front-end and Node.js and MongoDB for the back-end. The initial data was presented as separate CSV files that I manipulated into a single JSON file using Python Pandas and Jupyter Notebooks. Please see the folder **dataset** for documentation on how I manipulated the data. Once I manipulated the data, I uploaded the JSON file to MongoDB Atlas. Finally, this app is deployed using Heroku.
+This movie search app was built using React Native for the front-end and Node.js and MongoDB for the back-end. The initial data was presented as separate CSV files that I manipulated into a single JSON file using Python Pandas and Jupyter Notebooks. Please see the folder **dataset** for documentation on how I manipulated the data. Once I manipulated the data, I uploaded the JSON file to MongoDB Atlas. Finally, this app is deployed using Heroku [here](https://movie-search-diesel.herokuapp.com/).
 <br/>
 
 # Front-end
