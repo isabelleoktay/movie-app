@@ -34,7 +34,7 @@ function App() {
       <div class="overflow-x-auto relative">
         <table class="table-fixed w-full text-sm text-left text-gray-200 dark:text-gray-100">
             <thead class="text-xs dark:text-slate-600 uppercase bg-gray-50 dark:bg-emerald-300 dark:text-emerald-800">
-                <tr>
+                <tr className='dark:text-slate-600'>
                     <th scope="col" className="py-3 px-6">
                         Movie Id
                     </th>

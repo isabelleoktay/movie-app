@@ -14,7 +14,7 @@ const ObjectId = require("mongodb").ObjectId;
 let movies;
  
 // This section will help you get a list of all the records.
-movieRoutes.route("/movie").get((req, res) => {
+movieRoutes.route("/movie").get(function (req, res) {
  let db_connect = dbo.getDb("movie");
  db_connect
    .collection("movies")
@@ -22,12 +22,12 @@ movieRoutes.route("/movie").get((req, res) => {
    .toArray(function (err, result) {
      if (err) throw err;
      movies = result
-     res.send(movies);
+     res.json(movies);
    });
 });
  
 // This section will help you get a single record by id
-movieRoutes.route("/movie/:id").get((req, res) => {
+movieRoutes.route("/movie/:id").get(function (req, res) {
  let db_connect = dbo.getDb();
  let myquery = { _id: ObjectId(req.params.id) };
  db_connect

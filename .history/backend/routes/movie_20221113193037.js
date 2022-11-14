@@ -11,23 +11,48 @@ const dbo = require("../db/conn");
 // This help convert the id from string to ObjectId for the _id.
 const ObjectId = require("mongodb").ObjectId;
  
-let movies;
  
 // This section will help you get a list of all the records.
-movieRoutes.route("/movie").get((req, res) => {
+movieRoutes.route("/movie").get(function (req, res) {
  let db_connect = dbo.getDb("movie");
  db_connect
    .collection("movies")
    .find({})
    .toArray(function (err, result) {
      if (err) throw err;
-     movies = result
-     res.send(movies);
+     res.json(result);
    });
+});
+
+movieRoutes.route("/search").get( async (req, res) => {
+  let db_connect = dbo.getDb("movie");
+  try {
+      movies = db_connect
+          .collection("movies")
+          .find({})
+          .toArray(function (err, result) {
+              if (err) throw err;
+              res.json(result);
+          });
+      let result = await movies.aggregate([
+          {
+              "$search": {
+                  "autocomplete": `${req.query.term}`, 
+                  "path": "title",
+                  "fuzzy": {
+                      "maxEdits": 2,
+                  }
+              }
+          }
+      ]).toArray();
+      res.send(result);
+  } catch (e) {
+      res.status(500).send({ message: e.message });
+  }
 });
  
 // This section will help you get a single record by id
-movieRoutes.route("/movie/:id").get((req, res) => {
+movieRoutes.route("/movie/:id").get(function (req, res) {
  let db_connect = dbo.getDb();
  let myquery = { _id: ObjectId(req.params.id) };
  db_connect

@@ -3,6 +3,7 @@ import React from 'react';
 import './App.css';
 import {useState, useEffect} from 'react';
 //import styles from "./index.css";
+import { ReactSearchAutocomplete } from 'react-search-autocomplete'
 
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -27,13 +28,33 @@ function App() {
     return;
   }, [movies.length]);
 
+  const handleOnSearch = (string, results) => {
+    // onSearch will have as the first callback parameter
+    // the string searched and for the second the results.
+    console.log(string, results)
+  }
+
+  const handleOnHover = (result) => {
+    // the item hovered
+    console.log(result)
+  }
+
+  const handleOnSelect = (item) => {
+    // the item selected
+    console.log(item)
+  }
+
+  const handleOnFocus = () => {
+    console.log('Focused')
+  }
+
   return (
     <div className='App dark:bg-emerald-300'>
       <input className="mb-4 border-2 border-slate-800 focus:outline-none focus:ring-0" type='text' placeholder='search for movies :D' onChange={event => setSearchTerm(event.target.value)}/>
 
       <div class="overflow-x-auto relative">
         <table class="table-fixed w-full text-sm text-left text-gray-200 dark:text-gray-100">
-            <thead class="text-xs dark:text-slate-600 uppercase bg-gray-50 dark:bg-emerald-300 dark:text-emerald-800">
+            <thead class="text-xs dark:text-gray-800 uppercase bg-gray-50 dark:bg-emerald-300 dark:text-emerald-200">
                 <tr>
                     <th scope="col" className="py-3 px-6">
                         Movie Id
