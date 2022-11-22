@@ -29,7 +29,9 @@ function App() {
     <div className='App dark:bg-emerald-300'>
       <input className="mb-4 border-2 border-slate-800 focus:outline-none focus:ring-0" type='text' placeholder='search for movies :D' onChange={event => setSearchTerm(event.target.value)}/>
       <div className="overflow-x-auto relative">
-        <table className="table-fixed w-full text-sm text-left text-gray-200 dark:text-gray-100">
+        { movies ? 
+          (
+            <table className="table-fixed w-full text-sm text-left text-gray-200 dark:text-gray-100">
             <thead className="text-xs dark:text-slate-600 uppercase bg-gray-50 dark:bg-emerald-300 dark:text-emerald-800">
                 <tr>
                     <th scope="col" className="py-3 px-6">
@@ -83,7 +85,11 @@ function App() {
             })}
                 
             </tbody>
-        </table>
+        </table> ) : 
+          (
+            <p>loading ...</p>
+          ) }
+
       </div>
     </div>
   );
