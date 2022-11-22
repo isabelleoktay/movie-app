@@ -44,7 +44,7 @@ function App() {
                     <th scope="col" className="py-3 px-6">
                         Links
                     </th>
-                    <th scope="col" className="py-3 px-6">
+                    <th scope="col" className="py-3 px-3">
                         Average Rating
                     </th>
                     <th scope="col" className="py-3 px-6">

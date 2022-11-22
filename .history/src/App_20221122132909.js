@@ -75,7 +75,7 @@ function App() {
                   <td className="py-4 px-6">{val.rating}</td>
                   <td className="py-4 px-6">{val.tag.map((t, key) => {
                     return (
-                      <span key={key}>{ (key ? ', ' : '') + t }</span>
+                      <span key={key}>{t}, </span>
                     )
                   })}</td>
                 </tr>
