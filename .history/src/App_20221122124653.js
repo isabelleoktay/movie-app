@@ -16,7 +16,8 @@ function App() {
         return;
       }
   
-      const movies = await response.json();
+      const movies = await response.text();
+      console.log(movies);
       setMovies(movies);
     }
   

@@ -1,6 +1,8 @@
 import React from 'react';
+//import movies from './movies.json';
 import './App.css';
 import {useState, useEffect} from 'react';
+//import styles from "./index.css";
 
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -16,7 +18,8 @@ function App() {
         return;
       }
   
-      const movies = await response.json();
+      const movies = await response.text();
+      console.log(movies);
       setMovies(movies);
     }
   

@@ -1,14 +1,47 @@
 import React from 'react';
+import axios from 'axios';
+//import movies from './movies.json';
 import './App.css';
 import {useState, useEffect} from 'react';
+//import styles from "./index.css";
 
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
   const [movies, setMovies] = useState([]);
 
+  const data = JSON.stringify({
+    "collection": "movies",
+    "database": "movie",
+    "dataSource": "movies",
+    "projection": {"_id": 1, "movieId": 1, "title": 1, "genres": 1, "rating": 1, "tag": 1, "links": 1}
+  });
+  
+  const config = {
+    method: 'post',
+    url: 'https://data.mongodb-api.com/app/data-xinwh/endpoint/data/v1/action/find',
+    headers: {
+      'Content-Type': 'application/json',
+      'Access-Control-Request-Headers': '*',
+      'api-key': 'IHvYENoEMJhndrE8eW7JRNp6Qti9IbQXPawyOVv0wWRKZSbuid1ZHJVkPKo8vsBG',
+    },
+    data: data
+  };
+
+  axios(config)
+    .then(function (response) {
+        console.log(JSON.stringify(response.data));
+    })
+    .catch(function (error) {
+        console.log(error);
+    });
+
+
   useEffect(() => {
     async function getMovies() {
-      const response = await fetch('https://movie-app-diesel-backend.herokuapp.com/movie');
+      const response = await fetch(config);
+      response.header("Access-Control-Allow-Origin", "*");
+      response.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT,DELETE");
+      response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
   
       if (!response.ok) {
         const message = `An error occurred: ${response.statusText}`;

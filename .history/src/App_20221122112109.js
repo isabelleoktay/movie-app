@@ -1,14 +1,45 @@
 import React from 'react';
+import axios from 'axios';
+//import movies from './movies.json';
 import './App.css';
 import {useState, useEffect} from 'react';
+//import styles from "./index.css";
 
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
   const [movies, setMovies] = useState([]);
 
+  const data = JSON.stringify({
+    "collection": "movies",
+    "database": "movie",
+    "dataSource": "movies",
+    "projection": {
+        "_id": 1
+    }
+  });
+  
+  const config = {
+    method: 'post',
+    url: 'https://data.mongodb-api.com/app/data-xinwh/endpoint/data/v1/action/findOne',
+    headers: {
+      'Content-Type': 'application/json',
+      'Access-Control-Request-Headers': '*',
+      'api-key': 'IHvYENoEMJhndrE8eW7JRNp6Qti9IbQXPawyOVv0wWRKZSbuid1ZHJVkPKo8vsBG',
+    },
+    data: data
+  };
+
+  axios(config)
+    .then(function (response) {
+        console.log(JSON.stringify(response.data));
+    })
+    .catch(function (error) {
+        console.log(error);
+    });
+
   useEffect(() => {
     async function getMovies() {
-      const response = await fetch('https://movie-app-diesel-backend.herokuapp.com/movie');
+      const response = await fetch(config);
   
       if (!response.ok) {
         const message = `An error occurred: ${response.statusText}`;
@@ -29,9 +60,9 @@ function App() {
     <div className='App dark:bg-emerald-300'>
       <input className="mb-4 border-2 border-slate-800 focus:outline-none focus:ring-0" type='text' placeholder='search for movies :D' onChange={event => setSearchTerm(event.target.value)}/>
 
-      <div className="overflow-x-auto relative">
-        <table className="table-fixed w-full text-sm text-left text-gray-200 dark:text-gray-100">
-            <thead className="text-xs dark:text-slate-600 uppercase bg-gray-50 dark:bg-emerald-300 dark:text-emerald-800">
+      <div class="overflow-x-auto relative">
+        <table class="table-fixed w-full text-sm text-left text-gray-200 dark:text-gray-100">
+            <thead class="text-xs dark:text-slate-600 uppercase bg-gray-50 dark:bg-emerald-300 dark:text-emerald-800">
                 <tr>
                     <th scope="col" className="py-3 px-6">
                         Movie Id

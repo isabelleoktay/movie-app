@@ -2,7 +2,6 @@
   "name": "movie-app",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://data.mongodb-api.com/app/data-xinwh/endpoint/data/v1/action/find",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
