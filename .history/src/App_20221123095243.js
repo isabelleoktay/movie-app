@@ -25,15 +25,15 @@ function App() {
     getMovies();
   
     return;
-  }, []);
+  }, [movies.length]);
 
   const searchMovie = async (e) => {
-    const searchValue = e.target.value.replace(/\s/g, '');
+    const searchValue = e.target.value;
     const response = await fetch(`https://movie-app-diesel-backend.herokuapp.com/search?query=${searchValue}`);
 
     if (!response.ok) {
       const message = `An error occurred: ${response.statusText}`;
-      console.log(message);
+      window.alert(message);
       return;
     }
 

@@ -8,37 +8,38 @@ function App() {
   const [searchTerm, setSearchTerm] = useState('');
   const [movies, setMovies] = useState([]);
 
-  useEffect(() => {
-    async function getMovies() {
-      const response = await fetch('https://movie-app-diesel-backend.herokuapp.com/movie');
-  
-      if (!response.ok) {
-        const message = `An error occurred: ${response.statusText}`;
-        window.alert(message);
-        return;
-      }
-  
-      const movies = await response.json();
-      setMovies(movies);
-    }
-  
-    getMovies();
-  
-    return;
-  }, []);
-
-  const searchMovie = async (e) => {
-    const searchValue = e.target.value.replace(/\s/g, '');
-    const response = await fetch(`https://movie-app-diesel-backend.herokuapp.com/search?query=${searchValue}`);
+  const getMovies = async () => {
+    const response = await fetch('https://movie-app-diesel-backend.herokuapp.com/movie');
 
     if (!response.ok) {
       const message = `An error occurred: ${response.statusText}`;
-      console.log(message);
+      window.alert(message);
       return;
     }
 
     const movies = await response.json();
     setMovies(movies);
+  }
+
+  useEffect(() => getMovies(), [movies.length]);
+
+  const searchMovie = async (e) => {
+    const searchValue = e.target.value;
+    
+    if (!searchValue) {
+      getMovies();
+    } else {
+      const response = await fetch(`https://movie-app-diesel-backend.herokuapp.com/search?query=${searchValue}`);
+
+      if (!response.ok) {
+        const message = `An error occurred: ${response.statusText}`;
+        window.alert(message);
+        return;
+      }
+
+      const movies = await response.json();
+      setMovies(movies);
+    }
   };
 
   return (

@@ -25,20 +25,25 @@ function App() {
     getMovies();
   
     return;
-  }, []);
+  }, [movies.length]);
 
   const searchMovie = async (e) => {
-    const searchValue = e.target.value.replace(/\s/g, '');
-    const response = await fetch(`https://movie-app-diesel-backend.herokuapp.com/search?query=${searchValue}`);
+    const searchValue = e.target.value;
+    
+    if (!searchValue) {
+      getMovies();
+    } else {
+      const response = await fetch(`https://movie-app-diesel-backend.herokuapp.com/search?query=${searchValue}`);
 
-    if (!response.ok) {
-      const message = `An error occurred: ${response.statusText}`;
-      console.log(message);
-      return;
+      if (!response.ok) {
+        const message = `An error occurred: ${response.statusText}`;
+        window.alert(message);
+        return;
+      }
+
+      const movies = await response.json();
+      setMovies(movies);
     }
-
-    const movies = await response.json();
-    setMovies(movies);
   };
 
   return (

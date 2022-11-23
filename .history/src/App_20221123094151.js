@@ -1,8 +1,6 @@
 import React from 'react';
 import './App.css';
 import {useState, useEffect} from 'react';
-import Form from 'react-bootstrap/Form';
-import FormControl from 'react-bootstrap/FormControl';
 
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -25,15 +23,15 @@ function App() {
     getMovies();
   
     return;
-  }, []);
+  }, [movies.length]);
 
   const searchMovie = async (e) => {
-    const searchValue = e.target.value.replace(/\s/g, '');
+    const searchValue = e.target.value;
     const response = await fetch(`https://movie-app-diesel-backend.herokuapp.com/search?query=${searchValue}`);
 
     if (!response.ok) {
       const message = `An error occurred: ${response.statusText}`;
-      console.log(message);
+      window.alert(message);
       return;
     }
 
@@ -43,9 +41,7 @@ function App() {
 
   return (
     <div className='App dark:bg-emerald-300'>
-
-      <input className="mb-4 border-2 border-slate-800 focus:outline-none focus:ring-0" type='text' placeholder='search for movies :D' onChange={searchMovie}/>
-
+      <input className="mb-4 border-2 border-slate-800 focus:outline-none focus:ring-0" type='text' placeholder='search for movies :D' onChange={event => setSearchTerm(event.target.value)}/>
       <div className="overflow-x-auto relative">
         <table className="table-auto w-screen text-sm text-left text-gray-200 dark:text-gray-100">
             <thead className="text-xs dark:text-slate-600 uppercase bg-gray-50 dark:bg-emerald-300 dark:text-emerald-800">
